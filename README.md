@@ -1,7 +1,7 @@
 # Final
 Final Project of Group 7 for Programming Tools and Techniques 1T2627-CS0053
 
-**Group Name: PlantTitos**
+**Group Name: Xylem**
 Leader: Kent Anthony Capuno
 Members:
 Ailish Sophia Narvasa
