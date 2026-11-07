@@ -20,8 +20,8 @@ Jecyn Vallirie Turbanos
 | --- | --- |
 | Front End | HTML, CSS, JavaScript |
 | Backend | Node.js + Express |
-| Database | SQLite |
-| External API | Gemini API |
+| Database | PostgreSQL |
+| External API | Webhook API |
 | Plant visuals | SVG Illustrations + CSS Animations |
 | Dev Tools | VS Code, Git, GitHub |
 | Testing | Node server |
