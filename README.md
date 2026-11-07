@@ -1,5 +1,12 @@
-# final
+# Final
 Final Project of Group 7 for Programming Tools and Techniques 1T2627-CS0053
+
+**Group Name: PlantTitos**
+Leader: Kent Anthony Capuno
+Members:
+Ailish Sophia Narvasa
+Jericko Ocampo
+Jecyn Vallirie Turbanos
 
 ## Assets to be added (phases of the plant)
 - Seed
