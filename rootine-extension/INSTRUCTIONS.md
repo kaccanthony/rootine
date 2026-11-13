@@ -16,7 +16,7 @@ is selected.
 
 To try it:
 
-1. Open `chrome://extensions` in Chrome.
+1. Open `[browser]://extensions` in a browser.
 2. Turn on **Developer mode**.
 3. Choose **Load unpacked** and select the `rootine-extension` folder.
 4. Start the Rootine server and keep `http://localhost:3000` open.
