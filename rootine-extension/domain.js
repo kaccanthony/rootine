@@ -44,9 +44,24 @@
     }
   }
 
+  function isRootineUrl(value) {
+    if (isLocalHtmlUrl(value)) return true;
+
+    try {
+      const parsed = new URL(value);
+      return (
+        (parsed.protocol === "http:" || parsed.protocol === "https:") &&
+        (parsed.hostname === "localhost" || parsed.hostname === "127.0.0.1")
+      );
+    } catch (_error) {
+      return false;
+    }
+  }
+
   const api = {
     hostnameFromUrl,
     isLocalHtmlUrl,
+    isRootineUrl,
     isWhitelisted,
     normalizeWhitelistEntry,
   };

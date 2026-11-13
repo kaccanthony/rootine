@@ -163,34 +163,57 @@
 
         <section class="panel plant-panel" id="plant" aria-labelledby="plant-title">
           <div class="plant-heading">
-            <p class="section-kicker">Your plant</p>
-            <h2 id="plant-title">Meet Clover</h2>
-            <span class="stage-label" id="stage-label">Seedling</span>
+            <p class="section-kicker">Focus session</p>
+            <h2 id="plant-title">Grow with Clover</h2>
+            <span class="stage-label" id="stage-label">Sprout</span>
           </div>
 
-          <div class="plant-scene growth-2" id="plant-scene" aria-hidden="true">
-            <span class="sun-patch"></span>
-            <svg class="growing-plant" viewBox="0 0 240 260">
-              <path class="stem" d="M123 226C122 177 127 129 119 75" />
-              <path class="leaf leaf-one" d="M120 132C84 130 64 106 66 76c34 3 52 20 54 56Z" />
-              <path class="leaf leaf-two" d="M124 164c36-2 58-24 59-54-35 1-55 18-59 54Z" />
-              <path class="leaf leaf-three" d="M120 91C89 88 74 68 78 45c28 3 42 17 42 46Z" />
-              <path class="leaf leaf-four" d="M120 105c29-2 45-19 47-42-28 0-44 14-47 42Z" />
-              <path class="bud" d="M119 76c-12-14-9-31 3-42 13 11 15 29-3 42Z" />
+          <div class="focus-orbit">
+            <svg class="timer-ring" viewBox="0 0 320 320" aria-hidden="true">
+              <circle class="timer-ring-track" cx="160" cy="160" r="148" />
+              <circle class="timer-ring-progress" id="timer-ring-progress" cx="160" cy="160" r="148" />
             </svg>
-            <img
-              class="flower-pot"
-              src="/images/flower-pot.png"
-              alt=""
-              width="1536"
-              height="1536"
-            />
+            <div class="timer-readout">
+              <span>Focus time</span>
+              <strong id="focus-time">25:00</strong>
+            </div>
+            <div class="plant-scene growth-1" id="plant-scene" aria-hidden="true">
+              <span class="sun-patch"></span>
+              <svg class="growing-plant" viewBox="0 0 240 260">
+                <path class="stem" d="M123 226C122 177 127 129 119 75" />
+                <path class="leaf leaf-one" d="M120 132C84 130 64 106 66 76c34 3 52 20 54 56Z" />
+                <path class="leaf leaf-two" d="M124 164c36-2 58-24 59-54-35 1-55 18-59 54Z" />
+                <path class="leaf leaf-three" d="M120 91C89 88 74 68 78 45c28 3 42 17 42 46Z" />
+                <path class="leaf leaf-four" d="M120 105c29-2 45-19 47-42-28 0-44 14-47 42Z" />
+                <path class="bud" d="M119 76c-12-14-9-31 3-42 13 11 15 29-3 42Z" />
+              </svg>
+              <img
+                class="flower-pot"
+                src="/images/flower-pot.png"
+                alt=""
+                width="1536"
+                height="1536"
+              />
+            </div>
+          </div>
+
+          <div class="focus-controls">
+            <button class="primary-action" id="focus-card-button" type="button">
+              Begin focus session
+            </button>
+            <div class="round-progress" aria-label="Pomodoro rounds">
+              <span class="round-dot is-active"></span>
+              <span class="round-dot"></span>
+              <span class="round-dot"></span>
+              <span class="round-dot"></span>
+              <span><strong id="round-count">0</strong> of 4 rounds</span>
+            </div>
           </div>
 
           <div class="growth-summary">
             <div class="growth-copy">
               <span>Daily growth</span>
-              <strong id="growth-percent">60%</strong>
+              <strong id="growth-percent">3%</strong>
             </div>
             <div
               class="growth-track"
@@ -199,30 +222,41 @@
               aria-label="Daily plant growth"
               aria-valuemin="0"
               aria-valuemax="100"
-              aria-valuenow="60"
+              aria-valuenow="3"
             >
               <span id="growth-bar"></span>
             </div>
-            <p id="plant-message">Two more tasks will help Clover reach the next stage.</p>
+            <p id="plant-message">+3% today · each completed task adds 1% growth.</p>
           </div>
         </section>
 
         <aside class="right-column" aria-label="Today’s overview">
-          <section class="panel focus-panel" aria-labelledby="focus-title">
+          <section class="panel health-panel" aria-labelledby="health-title">
             <div class="panel-heading compact">
               <div>
-                <p class="section-kicker">Settle in</p>
-                <h2 id="focus-title">Daily focus</h2>
+                <p class="section-kicker">Focus protection</p>
+                <h2 id="health-title">Plant health</h2>
               </div>
-              <svg class="focus-mark" aria-hidden="true" viewBox="0 0 24 24">
-                <circle cx="12" cy="13" r="7.5" />
-                <path d="M9 2h6M12 5v2" />
-              </svg>
+              <span class="health-status" id="health-status">Waiting</span>
             </div>
-            <p class="focus-time" id="focus-time">25:00</p>
-            <p class="focus-note" id="focus-note">One quiet session for your most important task.</p>
-            <button class="primary-action" id="focus-card-button" type="button">
-              Begin focus session
+            <div class="risk-number"><strong id="risk-percent">0%</strong> death risk</div>
+            <div
+              class="risk-track"
+              id="risk-track"
+              role="progressbar"
+              aria-label="Plant death risk"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <span id="risk-bar"></span>
+            </div>
+            <p class="risk-note" id="risk-note">
+              Connect the Rootine extension to monitor distracting domains.
+            </p>
+            <p class="risk-rule">Risk rises 1% every 6 distracted minutes—5% total over 30 minutes—then triggers a death roll.</p>
+            <button class="secondary-action" id="replant-button" type="button" hidden>
+              Start a new seed
             </button>
           </section>
 

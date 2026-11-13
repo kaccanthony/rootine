@@ -1,14 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Rootine Focus Plant",
-  "version": "0.1.0",
-  "description": "Checks only the active website domain while a local Rootine HTML page is open.",
-  "permissions": ["storage", "tabs"],
+  "version": "0.2.0",
+  "description": "Tracks focused and distracted time to protect your Rootine plant.",
+  "permissions": ["storage", "tabs", "alarms"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_title": "Rootine Focus Plant",
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "file:///*.html"
+      ],
+      "js": ["dashboard-bridge.js"]
+    }
+  ]
 }

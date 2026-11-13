@@ -14,6 +14,27 @@
         <h1 id="status-heading">Checking your focus…</h1>
         <p id="status-message">Looking at the active domain.</p>
         <p id="checked-domain" class="domain" hidden></p>
+        <div class="risk-summary">
+          <div class="risk-copy">
+            <span>Plant death risk</span>
+            <strong id="risk-percent">0%</strong>
+          </div>
+          <div
+            id="risk-track"
+            class="risk-track"
+            role="progressbar"
+            aria-label="Plant death risk"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <span id="risk-bar"></span>
+          </div>
+          <p id="risk-note" class="risk-note">No distraction risk recorded.</p>
+        </div>
+        <button id="replant-button" class="replant-button" type="button" hidden>
+          Start a new seed
+        </button>
       </section>
 
       <section class="settings" aria-labelledby="whitelist-heading">

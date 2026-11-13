@@ -290,7 +290,7 @@ blockquote cite {
 
 .task-panel,
 .plant-panel,
-.focus-panel,
+.health-panel,
 .stats-panel {
   padding: 26px;
 }
@@ -328,8 +328,7 @@ blockquote cite {
   background: #e6e8de;
 }
 
-.task-progress span,
-.growth-track span {
+.task-progress span {
   display: block;
   width: 60%;
   height: 100%;
@@ -495,7 +494,7 @@ blockquote cite {
 
 .plant-panel {
   display: flex;
-  min-height: 590px;
+  min-height: 650px;
   flex-direction: column;
   overflow: hidden;
   background: #f6f0e3;
@@ -512,10 +511,78 @@ blockquote cite {
   margin-top: 10px;
 }
 
-.plant-scene {
+.focus-orbit {
   position: relative;
-  flex: 1;
-  min-height: 330px;
+  width: min(100%, 390px);
+  min-height: 340px;
+  margin: 0 auto;
+}
+
+.timer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
+
+.timer-ring-track,
+.timer-ring-progress {
+  fill: none;
+  stroke-width: 8;
+}
+
+.timer-ring-track {
+  stroke: #dce2c8;
+}
+
+.timer-ring-progress {
+  stroke: var(--forest);
+  stroke-linecap: round;
+  stroke-dasharray: 930;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 500ms linear;
+}
+
+.timer-readout {
+  position: absolute;
+  z-index: 3;
+  top: 38px;
+  left: 50%;
+  color: var(--forest);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.timer-readout span,
+.timer-readout strong {
+  display: block;
+}
+
+.timer-readout span {
+  margin-bottom: 2px;
+  color: #6d786d;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.timer-readout strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.plant-scene {
+  --growth-rise: 1px;
+  position: absolute;
+  inset: 93px 28px 12px;
+  min-height: 0;
   overflow: hidden;
   isolation: isolate;
 }
@@ -524,7 +591,7 @@ blockquote cite {
   position: absolute;
   z-index: -2;
   right: -80px;
-  bottom: 48px;
+  bottom: 22px;
   left: -80px;
   height: 92px;
   border-radius: 50%;
@@ -536,10 +603,10 @@ blockquote cite {
 .sun-patch {
   position: absolute;
   z-index: -3;
-  top: 25px;
+  top: 5px;
   left: 50%;
-  width: 290px;
-  height: 290px;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
   background: radial-gradient(circle, rgb(241 205 126 / 27%), transparent 68%);
   transform: translateX(-50%);
@@ -548,12 +615,13 @@ blockquote cite {
 .growing-plant {
   position: absolute;
   z-index: 1;
-  bottom: 52px;
+  bottom: 30px;
   left: 50%;
-  width: 226px;
-  height: 245px;
+  width: 172px;
+  height: 186px;
   overflow: visible;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(calc(var(--growth-rise) * -1));
+  transition: filter 300ms ease, transform 450ms ease;
 }
 
 .stem,
@@ -617,13 +685,59 @@ blockquote cite {
 .flower-pot {
   position: absolute;
   z-index: 2;
-  bottom: -285px;
+  bottom: -230px;
   left: 50%;
-  width: 650px;
+  width: 500px;
   max-width: none;
   height: auto;
   pointer-events: none;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(calc(var(--growth-rise) * -0.18));
+  transition: filter 300ms ease, transform 450ms ease;
+}
+
+.plant-panel.is-dead .growing-plant {
+  filter: grayscale(1) sepia(0.35);
+  transform: translateX(-50%) translateY(9px) rotate(11deg);
+  transform-origin: bottom center;
+}
+
+.plant-panel.is-dead .flower-pot {
+  filter: grayscale(0.75);
+}
+
+.plant-panel.is-dead .timer-ring-progress {
+  stroke: #9b4b3a;
+}
+
+.focus-controls {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -2px 0 14px;
+}
+
+.round-progress {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #667167;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.round-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d8ddca;
+}
+
+.round-dot.is-active,
+.round-dot.is-complete {
+  background: var(--leaf);
 }
 
 .growth-summary {
@@ -657,6 +771,14 @@ blockquote cite {
   background: #d9ddcd;
 }
 
+.growth-track span {
+  display: block;
+  width: 3%;
+  height: 100%;
+  background: var(--leaf);
+  transition: width 320ms ease;
+}
+
 .growth-summary p {
   margin: 10px 0 0;
   color: #6f796f;
@@ -675,61 +797,99 @@ blockquote cite {
   font-size: 1.4rem;
 }
 
-.focus-mark {
-  width: 25px;
-  height: 25px;
-  color: var(--leaf);
-}
-
-.focus-panel {
-  background: var(--forest);
-  color: white;
-}
-
-.focus-panel .section-kicker {
-  color: #b6ce9b;
-}
-
-.focus-panel h2 {
-  color: white;
-}
-
-.focus-panel .focus-mark {
-  color: #c7d9b3;
-}
-
-.focus-time {
-  margin: 26px 0 0;
-  color: white;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 3.5rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.focus-note {
-  min-height: 42px;
-  margin: 10px 0 20px;
-  color: #c8d7cc;
-  font-size: 0.83rem;
-  line-height: 1.5;
-}
-
 .primary-action {
   width: 100%;
   min-height: 43px;
-  border: 1px solid rgb(255 255 255 / 32%);
+  border: 1px solid var(--forest);
   border-radius: 9px;
-  background: #f7f3e8;
-  color: var(--forest-deep);
+  background: var(--forest);
+  color: white;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 800;
 }
 
 .primary-action:hover {
-  background: white;
+  background: var(--forest-deep);
+}
+
+.health-status {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #ebece4;
+  color: #667167;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.health-status.is-safe {
+  background: #e1ebd7;
+  color: var(--forest);
+}
+
+.health-status.is-risk {
+  background: #f3e2d9;
+  color: #9a442f;
+}
+
+.risk-number {
+  margin: 28px 0 11px;
+  color: #7a807a;
+  font-size: 0.8rem;
+}
+
+.risk-number strong {
+  margin-right: 5px;
+  color: #9a442f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+}
+
+.risk-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #e4e5dd;
+}
+
+.risk-track span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--terracotta);
+  transition: width 280ms ease;
+}
+
+.risk-note {
+  min-height: 38px;
+  margin: 12px 0 0;
+  color: #626d64;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.risk-rule {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #e7e3d9;
+  color: #858b84;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.secondary-action {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 15px;
+  border: 1px solid #9b4b3a;
+  border-radius: 9px;
+  background: #9b4b3a;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 800;
 }
 
 .stats-panel {
@@ -881,7 +1041,7 @@ blockquote cite {
   }
 
   .plant-panel {
-    min-height: 560px;
+    min-height: 650px;
   }
 }
 
@@ -919,17 +1079,21 @@ blockquote cite {
 
   .task-panel,
   .plant-panel,
-  .focus-panel,
+  .health-panel,
   .stats-panel {
     padding: 21px;
   }
 
-  .plant-scene {
-    min-height: 310px;
+  .focus-orbit {
+    min-height: 320px;
   }
 
-  .flower-pot {
-    bottom: -300px;
+  .focus-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .round-progress {
+    justify-content: center;
   }
 
   .stats-list {

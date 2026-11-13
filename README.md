@@ -26,15 +26,13 @@ Final Project of Group 7 for Programming Tools and Techniques 1T2627-CS0053
 | Dev Tools | VS Code, Git, GitHub |
 | Testing | Node server |
 
-## Run the dashboard
 
-```bash
-npm install
-npm start
-```
-
-Open `http://localhost:3000`. The current build is intentionally front-end only:
-task changes live in the browser session, and no database or SQL files are included.
+The dashboard awards 1% persistent plant growth the first time each task is
+completed. The companion extension tracks continuous distraction time: each
+six distracted minutes add 1% cumulative plant-death risk. After five increases
+(30 continuous minutes and 5% total), it performs one random roll against that
+risk. Reload the unpacked extension after changing its
+files so the updated service worker and dashboard bridge are active.
 
 ## Project structure
 
