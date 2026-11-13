@@ -213,6 +213,36 @@
       .plant-placeholder p {
         margin: 0;
       }
+      .focus-companion {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 16px;
+        align-items: center;
+      }
+      .focus-icon {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #e6f0e2;
+        font-size: 34px;
+      }
+      .focus-copy h2,
+      .focus-copy p {
+        margin: 0;
+      }
+      .focus-status {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 4px 9px;
+        border-radius: 999px;
+        color: #315740;
+        background: #e9f3e8;
+        font-size: 13px;
+        font-weight: bold;
+      }
       progress {
         width: 100%;
         height: 14px;
@@ -235,6 +265,9 @@
         }
         .card {
           padding: 20px;
+        }
+        .focus-companion {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -344,6 +377,25 @@
             0 of 4 tasks
           </progress>
         </section>
+
+        <!-- Temporary anchor used by the draft Chrome extension. -->
+        <section
+          class="card focus-companion"
+          id="focus-companion"
+          aria-labelledby="focus-heading"
+        >
+          <div class="focus-icon" aria-hidden="true">🌿</div>
+          <div class="focus-copy">
+            <h2 id="focus-heading">Focus companion (draft)</h2>
+            <p class="muted">
+              Keep this local HTML page open in Chrome. The Rootine extension
+              will compare only the active website's domain with your whitelist.
+            </p>
+            <span id="focus-anchor-status" class="focus-status">
+              Checking how this page was opened…
+            </span>
+          </div>
+        </section>
       </div>
 
       <!-- Garden: completed plants will be displayed here -->
@@ -437,7 +489,15 @@
 
       const taskList = document.getElementById("task-list");
       const addTaskButton = document.getElementById("add-task");
+      const focusAnchorStatus = document.getElementById("focus-anchor-status");
       let taskNumber = 1;
+
+      if (window.location.protocol === "file:") {
+        focusAnchorStatus.textContent = "Focus anchor active — keep this tab open";
+      } else {
+        focusAnchorStatus.textContent =
+          "Open this file directly in Chrome to activate the draft extension";
+      }
 
       function addTaskRow() {
         taskNumber += 1;
