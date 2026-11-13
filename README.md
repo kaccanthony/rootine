@@ -26,6 +26,32 @@ Final Project of Group 7 for Programming Tools and Techniques 1T2627-CS0053
 | Dev Tools | VS Code, Git, GitHub |
 | Testing | Node server |
 
+## Run the dashboard
+
+```bash
+npm install
+npm start
+```
+
+Open `http://localhost:3000`. The current build is intentionally front-end only:
+task changes live in the browser session, and no database or SQL files are included.
+
+## Project structure
+
+```text
+rootine/
+├── public/
+│   ├── images/          # Browser-ready image assets
+│   ├── scripts/         # Dashboard interactions
+│   ├── styles/          # Site styling and responsive layout
+│   └── index.html       # Main dashboard
+├── src/
+│   └── server.js        # Express entry point
+├── rootine-extension/   # Existing Chrome extension prototype
+├── UI-Drafts/           # Design references
+└── package.json
+```
+
 Separate Design per plant design
 
 Part of the plant, when the plant grows, the other part of the plant also grows. That plant will be the chatbot that will discuss the statistics and summary of your schedule. This will be the main use of the API to achieve the goal of using API

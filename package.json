@@ -1,0 +1,18 @@
+{
+  "name": "rootine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A task dashboard that turns steady routines into plant growth.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check public/scripts/dashboard.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

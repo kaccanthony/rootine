@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ROOTINE turns small daily tasks into visible plant growth."
+    />
+    <title>ROOTINE | My Tasks</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="/scripts/dashboard.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="ROOTINE home">
+          <span>ROOTINE</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M7 17C7 10 11 5 19 4c0 8-4 12-11 12" />
+            <path d="M7 20c0-6 3-10 8-13" />
+          </svg>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#tasks" aria-current="page">
+            My tasks
+          </a>
+          <button class="nav-link future-link" type="button" data-future="Garden">
+            Garden
+          </button>
+          <button
+            class="nav-link future-link"
+            type="button"
+            data-future="Plant library"
+          >
+            Plant library
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button class="focus-button" id="focus-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="13" r="7.5" />
+              <path d="M9 2h6M12 5v2M18 7l1.5-1.5" />
+            </svg>
+            <span id="focus-label">Start focus</span>
+          </button>
+          <button class="profile-button" type="button" aria-label="Open profile menu">
+            PE
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="dashboard-shell">
+      <section class="welcome" aria-labelledby="welcome-title">
+        <div>
+          <p class="eyebrow" id="today-label">Today</p>
+          <h1 id="welcome-title">Good afternoon, Kent.</h1>
+          <p class="welcome-copy">A few small wins are enough for today.</p>
+        </div>
+        <blockquote>
+          “Great things are done by a series of small things brought together.”
+          <cite>— Vincent van Gogh</cite>
+        </blockquote>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="panel task-panel" id="tasks" aria-labelledby="tasks-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Daily plan</p>
+              <h2 id="tasks-title">Today’s tasks</h2>
+            </div>
+            <span class="count-badge" id="task-count">3 / 5</span>
+          </div>
+
+          <div class="task-progress" aria-hidden="true">
+            <span id="task-progress-bar"></span>
+          </div>
+          <p class="sr-only" id="task-progress-text" aria-live="polite">
+            3 of 5 tasks complete
+          </p>
+
+          <ul class="task-list" id="task-list" aria-label="Today’s task list">
+            <li class="task-item is-complete">
+              <label>
+                <input type="checkbox" checked />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span class="task-copy">
+                  <span class="task-name">Make the bed</span>
+                  <span class="task-meta">Personal · 5 min</span>
+                </span>
+              </label>
+              <button class="remove-task" type="button" aria-label="Remove Make the bed">×</button>
+            </li>
+            <li class="task-item is-complete">
+              <label>
+                <input type="checkbox" checked />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span class="task-copy">
+                  <span class="task-name">Review lecture notes</span>
+                  <span class="task-meta">Study · 20 min</span>
+                </span>
+              </label>
+              <button class="remove-task" type="button" aria-label="Remove Review lecture notes">×</button>
+            </li>
+            <li class="task-item is-complete">
+              <label>
+                <input type="checkbox" checked />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span class="task-copy">
+                  <span class="task-name">Plan the day</span>
+                  <span class="task-meta">Planning · 10 min</span>
+                </span>
+              </label>
+              <button class="remove-task" type="button" aria-label="Remove Plan the day">×</button>
+            </li>
+            <li class="task-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span class="task-copy">
+                  <span class="task-name">Work on project outline</span>
+                  <span class="task-meta">Project · 30 min</span>
+                </span>
+              </label>
+              <button class="remove-task" type="button" aria-label="Remove Work on project outline">×</button>
+            </li>
+            <li class="task-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span class="task-copy">
+                  <span class="task-name">Read one chapter</span>
+                  <span class="task-meta">Study · 25 min</span>
+                </span>
+              </label>
+              <button class="remove-task" type="button" aria-label="Remove Read one chapter">×</button>
+            </li>
+          </ul>
+
+          <form class="add-task-form" id="add-task-form">
+            <label class="sr-only" for="new-task">Add a task</label>
+            <input
+              id="new-task"
+              name="task"
+              type="text"
+              maxlength="80"
+              placeholder="Add a small task…"
+              autocomplete="off"
+            />
+            <button type="submit" aria-label="Add task">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </form>
+        </section>
+
+        <section class="panel plant-panel" id="plant" aria-labelledby="plant-title">
+          <div class="plant-heading">
+            <p class="section-kicker">Your plant</p>
+            <h2 id="plant-title">Meet Clover</h2>
+            <span class="stage-label" id="stage-label">Seedling</span>
+          </div>
+
+          <div class="plant-scene growth-2" id="plant-scene" aria-hidden="true">
+            <span class="sun-patch"></span>
+            <svg class="growing-plant" viewBox="0 0 240 260">
+              <path class="stem" d="M123 226C122 177 127 129 119 75" />
+              <path class="leaf leaf-one" d="M120 132C84 130 64 106 66 76c34 3 52 20 54 56Z" />
+              <path class="leaf leaf-two" d="M124 164c36-2 58-24 59-54-35 1-55 18-59 54Z" />
+              <path class="leaf leaf-three" d="M120 91C89 88 74 68 78 45c28 3 42 17 42 46Z" />
+              <path class="leaf leaf-four" d="M120 105c29-2 45-19 47-42-28 0-44 14-47 42Z" />
+              <path class="bud" d="M119 76c-12-14-9-31 3-42 13 11 15 29-3 42Z" />
+            </svg>
+            <img
+              class="flower-pot"
+              src="/images/flower-pot.png"
+              alt=""
+              width="1536"
+              height="1536"
+            />
+          </div>
+
+          <div class="growth-summary">
+            <div class="growth-copy">
+              <span>Daily growth</span>
+              <strong id="growth-percent">60%</strong>
+            </div>
+            <div
+              class="growth-track"
+              id="growth-track"
+              role="progressbar"
+              aria-label="Daily plant growth"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="60"
+            >
+              <span id="growth-bar"></span>
+            </div>
+            <p id="plant-message">Two more tasks will help Clover reach the next stage.</p>
+          </div>
+        </section>
+
+        <aside class="right-column" aria-label="Today’s overview">
+          <section class="panel focus-panel" aria-labelledby="focus-title">
+            <div class="panel-heading compact">
+              <div>
+                <p class="section-kicker">Settle in</p>
+                <h2 id="focus-title">Daily focus</h2>
+              </div>
+              <svg class="focus-mark" aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="13" r="7.5" />
+                <path d="M9 2h6M12 5v2" />
+              </svg>
+            </div>
+            <p class="focus-time" id="focus-time">25:00</p>
+            <p class="focus-note" id="focus-note">One quiet session for your most important task.</p>
+            <button class="primary-action" id="focus-card-button" type="button">
+              Begin focus session
+            </button>
+          </section>
+
+          <section class="panel stats-panel" aria-labelledby="stats-title">
+            <div class="panel-heading compact">
+              <div>
+                <p class="section-kicker">This week</p>
+                <h2 id="stats-title">Your rhythm</h2>
+              </div>
+            </div>
+            <dl class="stats-list">
+              <div>
+                <dt>Current streak</dt>
+                <dd><strong>5</strong> days</dd>
+              </div>
+              <div>
+                <dt>Tasks finished</dt>
+                <dd><strong id="completed-stat">18</strong> tasks</dd>
+              </div>
+              <div>
+                <dt>Focus time</dt>
+                <dd><strong>2.5</strong> hours</dd>
+              </div>
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
